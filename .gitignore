@@ -1,0 +1,6 @@
+/dist/
+/buildcontainer/build.log
+/terraform/.terraform/
+.idea/
+/node_modules/
+

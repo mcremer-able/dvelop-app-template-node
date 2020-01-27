@@ -1,0 +1,22 @@
+{
+  "name": "acme-apptemplatenode",
+  "version": "0.0.1",
+  "description": "This template contains everything you need to write an app for d.velop cloud.",
+  "private": true,
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./bin/www"
+  },
+  "author": "Martin Testrot",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "aws-serverless-express": "^3.3.6",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "^4.17.1",
+    "hbs": "^4.1.0",
+    "http-errors": "^1.7.3",
+    "morgan": "~1.9.1"
+  }
+}
