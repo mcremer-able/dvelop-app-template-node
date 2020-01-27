@@ -8,6 +8,7 @@ of *an employee applying for vacation* is implemented.
 | WARNING: This template is at a very early stage and I am by no means a node.js pro. Help is appreciated.|
 | --- |
 
+
 ## Getting Started
 
 Just clone this repo and follow the [build instructions](#build) to get the sample app up and running.
