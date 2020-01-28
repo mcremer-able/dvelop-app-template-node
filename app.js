@@ -20,12 +20,15 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
-app.use(logger('dev'));
+logger.token('tenantId', function getTenantId (req) {
+    return req.tenantId
+})
+app.use(logger('[ctx@49610 tn=":tenantId"][http@49610 method=":method" url=":url" millis=":response-time" sbytes=":res[content-length]" status=":status"] '));
+app.use(tenant);
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(assetBasePath, express.static(path.join(__dirname, 'web')));
-app.use(tenant);
 
 app.use(basePath + '/', rootRouter);
 app.use(basePath + '/features', featuresRouter);
