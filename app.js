@@ -4,6 +4,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const tenant = require('./modules/tenant')(process.env.systemBaseUri, process.env.SIGNATURE_SECRET);
+const requestId = require('./modules/requestid');
 
 const appName = "acme-apptemplatenode";
 const basePath = "/" + appName;
@@ -20,11 +21,15 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
-logger.token('tenantId', function getTenantId (req) {
-    return req.tenantId
-})
-app.use(logger('[ctx@49610 tn=":tenantId"][http@49610 method=":method" url=":url" millis=":response-time" sbytes=":res[content-length]" status=":status"] '));
 app.use(tenant);
+app.use(requestId);
+logger.token('tenantId', function getTenantId(req) {
+    return req.tenantId
+});
+logger.token('requestId', function getRequestId(req) {
+    return req.requestId
+});
+app.use(logger('[ctx@49610 rid=":requestId" tn=":tenantId"][http@49610 method=":method" url=":url" millis=":response-time" sbytes=":res[content-length]" status=":status"] '));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
@@ -45,7 +50,7 @@ app.use(function (err, req, res, next) {
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-    console.error (err.message);
+    console.error(err.message);
 
     // render the error page
     res.status(err.status || 500);
