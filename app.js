@@ -14,6 +14,7 @@ const version = process.env.BUILD_VERSION || '1.0.0';
 const rootRouter = require('./routes/root')(assetBasePath, basePath, version);
 const featuresRouter = require('./routes/features')(assetBasePath, basePath);
 const vacationrequestRouter = require('./routes/vacationrequest')(assetBasePath);
+const idpDemoRouter = require('./routes/idpdemo')(assetBasePath);
 
 const app = express();
 
@@ -38,6 +39,7 @@ app.use(assetBasePath, express.static(path.join(__dirname, 'web')));
 app.use(basePath + '/', rootRouter);
 app.use(basePath + '/features', featuresRouter);
 app.use(basePath + '/vacationrequest/', vacationrequestRouter);
+app.use(basePath + '/idpdemo', idpDemoRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
