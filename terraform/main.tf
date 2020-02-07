@@ -20,7 +20,7 @@ locals {
 }
 
 module "serverless_lambda_app" {
-  source             = "modules/serverless_lambda_app"
+  source             = "./modules/serverless_lambda_app"
   stages             = "${local.stages}"
   appname            = "${var.appname}"
   lambda_file        = "${local.lambda_file}"
@@ -52,14 +52,12 @@ module "serverless_lambda_app" {
 # - Both, the cloudfront distribution and a custom domain name für API endpoints require a DNS hosted zone.
 #   So this resources must be uncommented if you want to use either of them.
 # cf. https://www.terraform.io/docs/providers/aws/d/route53_zone.html
-/*
 resource "aws_route53_zone" "hosted_zone" {
   name = "${var.appname}${var.domainsuffix}"
 }
 output "nameserver" {
   value = "${aws_route53_zone.hosted_zone.name_servers}"
 }
-*/
 
 # Uncomment if you want to use cloudfront (a CDN) to deliver your assets.
 # IMPORTANT:
@@ -67,14 +65,12 @@ output "nameserver" {
 #   the module creates certificates which ar validated via DNS
 # - The module might fail because it will take some time (up to or more than 30 min)
 #   for a certificate to be validated by AWS. If this is the case just invoke terraform a second time.
-/*
 module "asset_cdn" {
-  source                = "modules/cloudfront_distribution"
+  source                = "./modules/cloudfront_distribution"
   hosted_zone_id        = "${aws_route53_zone.hosted_zone.id}"
   custom_subdomain_name = "assets"
   origin_domain_name    = "${module.serverless_lambda_app.assets_bucket_domain_name}"
 }
-*/
 
 # Uncomment if you want to use custom domain names for your API endpoints.
 # cf. https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html
@@ -83,12 +79,10 @@ module "asset_cdn" {
 #   the module creates certificates which ar validated via DNS
 # - The module might fail because it will take some time (up to or more than 30 min)
 #   for a certificate to be validated by AWS. If this is the case just invoke terraform a second time.
-/*
 module "api_custom_domains" {
-  source                                                = "modules/api_custom_domain"
+  source                                                = "./modules/api_custom_domain"
   hosted_zone_id                                        = "${aws_route53_zone.hosted_zone.id}"
   aws_api_gateway_rest_api_id                           = "${module.serverless_lambda_app.aws_api_gateway_rest_api_id}"
   aws_api_gateway_rest_api_endpoint_configuration_types = "${module.serverless_lambda_app.aws_api_gateway_rest_api_endpoint_configuration_types}"
   stages                                                = "${module.serverless_lambda_app.stages}"
 }
-*/
