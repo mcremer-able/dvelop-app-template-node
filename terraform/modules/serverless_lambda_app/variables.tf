@@ -1,5 +1,5 @@
 variable "stages" {
-  type = map(string)
+  type = "map"
 
   # Unfortunately there is a bug in terraform which leads to the destruction of existing resources if
   # the element order of lists and maps changes cf. https://github.com/hashicorp/terraform/issues/16210
@@ -23,8 +23,7 @@ variable "appname" {
   description = "appname without app suffix e.g. pdf, dms, inbound."
 }
 
-variable "aws_region" {
-}
+variable "aws_region" {}
 
 variable "lambda_file" {
   description = "Path to ZIP file with lambda function"
@@ -44,16 +43,15 @@ variable "lambda_memory_size" {
 }
 
 variable "lambda_environment_vars" {
-  type        = map(string)
+  type        = "map"
   description = "map that defines environment variables for the lambda function"
 }
 
 variable "lambda_policy_attachements" {
-  type        = list(string)
+  type        = "list"
   description = "list of policies to attach to the lambda function"
 }
 
 variable "source_code_hash" {
   description = "Source code hash of the lambda function. New version will only be deployed if the hash changes between 2 deployments."
 }
-

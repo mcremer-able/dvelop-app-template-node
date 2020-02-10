@@ -9,4 +9,3 @@ variable "custom_subdomain_name" {
 variable "hosted_zone_id" {
   description = "id of the DNS hosted zone"
 }
-
