@@ -6,6 +6,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "node-dev --no-notify ./bin/www",
     "start": "node ./bin/www"
   },
   "author": "Martin Testrot",
@@ -20,5 +21,8 @@
     "morgan": "~1.9.1",
     "request": "^2.88.2",
     "uuid": "^3.4.0"
+  },
+  "devDependencies": {
+    "node-dev": "^4.0.0"
   }
 }

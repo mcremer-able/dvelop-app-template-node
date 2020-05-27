@@ -9,12 +9,11 @@ module.exports = function (assetBasePath, basePath, version) {
         res.format({
             'text/html': function () {
                 res.render('root', {
-                    title: 'Vacationprocess',
+                    title: 'Root of your app',
                     stylesheet: `${assetBasePath}/root.css`,
                     version: version
                 });
             },
-
             'application/hal+json': function () {
                 res.send(
                     {
@@ -26,7 +25,6 @@ module.exports = function (assetBasePath, basePath, version) {
                     }
                 )
             },
-
             'default': function () {
                 res.status(406).send('Not Acceptable')
             }

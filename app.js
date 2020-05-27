@@ -21,6 +21,7 @@ const app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+app.locals.base = basePath;
 
 app.use(tenant);
 app.use(requestId);
@@ -31,7 +32,8 @@ logger.token('requestId', function getRequestId(req) {
     return req.requestId
 });
 app.use(logger('[ctx@49610 rid=":requestId" tn=":tenantId"][http@49610 method=":method" url=":url" millis=":response-time" sbytes=":res[content-length]" status=":status"] '));
-app.use(express.json());
+app.use(express.json({type: ['application/json', 'application/*+json']}));
+
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(assetBasePath, express.static(path.join(__dirname, 'web')));

@@ -1,9 +1,15 @@
 <body>
-<div>
-    <header>
-        <h1>This demonstrates the usage of the d.velop IdentityProvider (IdP)</h1>
+    <header class="mdc-top-app-bar mdc-top-app-bar--fixed">
+        <div class="mdc-top-app-bar__row">
+            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start" role="toolbar">
+                <a href=".">
+                    <button class="mdc-icon-button material-icons mdc-top-app-bar__action-item">arrow_back</button>
+                </a>
+                <span class="mdc-top-app-bar__title mdc-theme--on-primary">{{title}}</span>
+            </section>
+        </div>
     </header>
-    <main>
+    <main class="mdc-top-app-bar--fixed-adjust">
         <dl>
             <dt>User Id</dt>
             <dd>{{UserId}}</dd>
@@ -11,6 +17,4 @@
             <dd>{{UserName}}</dd>
         </dl>
     </main>
-</div>
 </body>
-</html>

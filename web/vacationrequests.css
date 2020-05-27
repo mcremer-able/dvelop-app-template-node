@@ -1,21 +1,14 @@
 :root{
-    --mdc-theme-primary:#fff;
-    --mdc-theme-on-primary:#333;
+    --mdc-theme-primary:#333e48;
+    --mdc-theme-on-primary: #fff;
 }
 
-.dmc-list-item {
-    position: relative;
+#requests .mdc-list-item {
+    margin: 10px;
 }
 
-.dmc-list-item .mdc-list-item__meta {
-    position: absolute;
-    top: 50%;
-    right: 0;
-    transform: translate(-50%,-50%);
-}
-
-.dmc-list-item__graphic {
-    margin-right: 16px;
+#requests .mdc-list-item__text {
+    height: 70px;
 }
 
 [data-state="rejected"] .state-icon{
@@ -29,5 +22,3 @@
 [data-state="cancelled"] .mdc-list-item__text{
     text-decoration: line-through;
 }
-
-
