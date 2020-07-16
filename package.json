@@ -7,7 +7,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "node-dev --no-notify ./bin/www",
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "compile": "echo Running ESLint ... && npx eslint **/*.js && echo done"
   },
   "author": "Martin Testrot",
   "license": "Apache-2.0",
@@ -23,6 +24,8 @@
     "uuid": "^3.4.0"
   },
   "devDependencies": {
+    "eslint": "^7.3.1",
+    "eslint-plugin-import": "^2.22.0",
     "node-dev": "^4.0.0"
   }
 }
