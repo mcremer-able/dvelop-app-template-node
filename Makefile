@@ -7,6 +7,7 @@ all: build
 clean:
 	rm -rf ./dist
 	rm -rf ./terraform/.terraform
+	rm -rf ./lib
 
 init:
 	mkdir -p ./dist/test-reports
@@ -16,9 +17,13 @@ test: init
 
 build: clean build-lambda
 
-build-lambda: test
-	npm run build
-	zip -X -r ./dist/lambda.zip *.js node_modules
+compile-ts:
+	npm run compile
+
+build-lambda: compile-ts test
+	cd ./lib && zip -X -r ../dist/lambda.zip ./ && cd .. && \
+	cp package.json dist/package.json && cd dist && npm install --only=production && cd .. && \
+	cd ./dist && zip -X -ur lambda.zip node_modules && cd ..
 
 tf-bucket:
 	$(eval BUCKET_NAME=$(APP_NAME)-terraform)
