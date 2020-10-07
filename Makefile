@@ -23,7 +23,7 @@ compile-ts:
 build-lambda: compile-ts test
 	cd ./lib && zip -X ../dist/lambda.zip `find ./ -name "*.js" -type f` && cd .. && \
 	cp package.json dist/package.json && cd dist && npm install --only=production && cd .. && \
-	cd ./dist && zip -X -ur lambda.zip `find ./node_modules -type f -not -name "README.md" -not -name "LICENSE"`  && cd ..
+	cd ./dist && zip -X -ur lambda.zip `find ./node_modules -type f -not -iname "README.md" -not -iname "LICENSE" -not -iname "HISTORY.md"`  && cd ..
 
 tf-bucket:
 	$(eval BUCKET_NAME=$(APP_NAME)-terraform)
