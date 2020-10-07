@@ -21,7 +21,7 @@ compile-ts:
 	npm run compile
 
 build-lambda: compile-ts test
-	cd ./lib && zip -X -r ../dist/lambda.zip ./ && cd .. && \
+	cd ./lib && zip -X ../dist/lambda.zip `find ./ -name "*.js" -type f` && cd .. && \
 	cp package.json dist/package.json && cd dist && npm install --only=production && cd .. && \
 	cd ./dist && zip -X -ur lambda.zip node_modules && cd ..
 
