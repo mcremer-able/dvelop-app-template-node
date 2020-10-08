@@ -190,6 +190,10 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduc
 
 Please read [LICENSE](LICENSE) for licensing information.
 
+## Improvements/Todos
+
+Please read [TODOS.md](TODOS.md) for a list of possible improvements and todos
+
 ## Acknowledgments
 
 Thanks to the following projects for inspiration
