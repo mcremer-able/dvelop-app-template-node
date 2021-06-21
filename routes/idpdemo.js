@@ -1,10 +1,10 @@
 const express = require('express');
-const authenticate = require('../modules/idp')();
+const dvelop = require('../middleware/dvelop')
 
-module.exports = function (assetBasePath, basePath, version) {
+module.exports = function (assetBasePath) {
     const router = express.Router();
 
-    router.use(authenticate);
+    router.use(dvelop.authenticate);
 
     router.get('/', function (req, res, next) {
         res.format({
