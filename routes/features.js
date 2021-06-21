@@ -3,6 +3,8 @@ const express = require('express');
 module.exports = function (assetBasePath, basePath) {
     const router = express.Router();
 
+    // ATTENTION: This page does not use the authenticate middleware meaning its publicly available
+
     router.get('/', function (req, res, next) {
         res.format({
             'application/hal+json': function () {
