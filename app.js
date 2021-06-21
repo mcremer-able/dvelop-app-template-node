@@ -6,7 +6,7 @@ const logger = require('morgan');
 const tenant = require('./modules/tenant')(process.env.systemBaseUri, process.env.SIGNATURE_SECRET);
 const requestId = require('./modules/requestid');
 
-const appName = "acme-apptemplatenode";
+const appName = "acme-lklo";
 const basePath = "/" + appName;
 const assetBasePath = process.env.ASSET_BASE_PATH || `/${appName}/assets`;
 const version = process.env.BUILD_VERSION || '1.0.0';
