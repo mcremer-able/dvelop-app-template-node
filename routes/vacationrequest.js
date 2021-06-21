@@ -1,5 +1,6 @@
 const express = require('express');
 const uuid = require('uuid');
+const dvelop = require('../middleware/dvelop');
 
 
 
@@ -25,6 +26,8 @@ let vacationRequests = [
 
 module.exports = function (assetBasePath) {
     const router = express.Router();
+
+    router.use(dvelop.authenticate); // This page requires a logged in user.
 
     router.get('/', function (req, res, next) {
         res.format({

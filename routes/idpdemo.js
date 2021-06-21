@@ -4,7 +4,7 @@ const dvelop = require('../middleware/dvelop')
 module.exports = function (assetBasePath) {
     const router = express.Router();
 
-    router.use(dvelop.authenticate);
+    router.use(dvelop.authenticate); // This page requires a logged in user.
 
     router.get('/', function (req, res, next) {
         res.format({
