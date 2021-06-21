@@ -3,8 +3,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const tenant = require('./modules/tenant')(process.env.systemBaseUri, process.env.SIGNATURE_SECRET);
-const requestId = require('./modules/requestid');
+const dvelop= require('./middleware/dvelop');
 
 const appName = "acme-lklo";
 const basePath = "/" + appName;
@@ -23,8 +22,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 app.locals.base = basePath;
 
-app.use(tenant);
-app.use(requestId);
+app.use(dvelop.setContext);
+
 logger.token('tenantId', function getTenantId(req) {
     return req.tenantId
 });
