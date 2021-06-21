@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const dvelop= require('./middleware/dvelop');
 
-const appName = "acme-lklo";
+const appName = "acme-apptemplatenode";
 const basePath = "/" + appName;
 const assetBasePath = process.env.ASSET_BASE_PATH || `/${appName}/assets`;
 const version = process.env.BUILD_VERSION || '1.0.0';
