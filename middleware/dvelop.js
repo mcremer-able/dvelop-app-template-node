@@ -44,12 +44,15 @@ function getAuthSessionId(req) {
 }
 
 function rejectRequest(req, res) {
-    if (req.get('Content-Type') === 'text/html') {
-        const redirectUri = idp.getLoginRedirectionUri(res.originalUrl);
-        res.redirect(redirectUri);
-    } else {
-        res.status(401).send("Unauthorized");
-    }
+
+    res.format({
+        'text/html': function () {
+            res.redirect(idp.getLoginRedirectionUri(req.originalUrl))
+        },
+        'default': function () {
+            res.status(401).send('Unauthorized')
+        }
+    });
 }
 
 module.exports = { setContext, authenticate }

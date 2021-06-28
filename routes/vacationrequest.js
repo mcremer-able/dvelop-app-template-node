@@ -27,7 +27,7 @@ let vacationRequests = [
 module.exports = function (assetBasePath) {
     const router = express.Router();
 
-    router.use(dvelop.authenticate); // This page requires a logged in user.
+    // ATTENTION: This page does not use the authenticate middleware meaning its publicly available
 
     router.get('/', function (req, res, next) {
         res.format({
