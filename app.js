@@ -23,6 +23,7 @@ app.set('view engine', 'hbs');
 app.locals.base = basePath;
 
 app.use(dvelop.setContext);
+// app.use(dvelop.validateRequestSignature) // ATTENTION: This middleware should be commented in for every request once the app runs within d.velop context
 
 logger.token('tenantId', function getTenantId(req) {
     return req.tenantId

@@ -5,14 +5,17 @@ function setContext(req, res, next) {
     req.systemBaseUri = req.get(appRouter.DVELOP_SYSTEM_BASE_URI_HEADER) || process.env.systemBaseUri;
     req.tenantId = req.get(appRouter.DVELOP_TENANT_ID_HEADER) || 0;
     req.requestId = req.get(appRouter.DVELOP_REQUEST_ID_HEADER) || appRouter.generateRequestId();
-    const requestSignature = req.get(appRouter.DVELOP_REQUEST_SIGNATURE_HEADER);
+    next();
+}
 
-    // ATTENTION: The RequestSignature should always be validated. Invalid RequestSiganuters might be a security risk.
-    const validRequest = appRouter.validateRequestSignature(process.env.SIGNATURE_SECRET, req.systemBaseUri, req.tenantId, requestSignature);
+function validateRequestSignature(req, res, next) {
+    try {
+        const requestSignature = req.get(appRouter.DVELOP_REQUEST_SIGNATURE_HEADER);
 
-    if (validRequest) {
+        // ATTENTION: The RequestSignature should always be validated. Invalid RequestSiganuters might be a security risk.
+        appRouter.validateRequestSignature(process.env.SIGNATURE_SECRET, req.systemBaseUri, req.tenantId, requestSignature);
         next();
-    } else {
+    } catch(e) {
         res.status(401).send("Forbidden");
     }
 }
@@ -55,4 +58,4 @@ function rejectRequest(req, res) {
     });
 }
 
-module.exports = { setContext, authenticate }
+module.exports = { setContext, validateRequestSignature, authenticate }
