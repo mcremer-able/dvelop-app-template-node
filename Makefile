@@ -17,7 +17,6 @@ test: init
 build: clean build-lambda
 
 build-lambda: test
-	npm run compile
 	zip -X -r ./dist/lambda.zip *.js node_modules modules routes views
 
 tf-bucket:
