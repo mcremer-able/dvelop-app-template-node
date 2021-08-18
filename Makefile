@@ -17,7 +17,7 @@ test: init
 build: clean build-lambda
 
 build-lambda: test
-	zip -X -r ./dist/lambda.zip *.js node_modules modules routes views
+	zip -X -r ./dist/lambda.zip *.js node_modules modules routes views middleware
 
 tf-bucket:
 	$(eval BUCKET_NAME=$(APP_NAME)-terraform)
