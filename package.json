@@ -13,7 +13,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@dvelop-sdk/app-router": "^2.0.3",
-    "@dvelop-sdk/identityprovider": "^2.0.5",
+    "@dvelop-sdk/identityprovider": "^2.1.7",
     "aws-serverless-express": "^3.3.8",
     "cookie-parser": "^1.4.5",
     "debug": "~2.6.9",
