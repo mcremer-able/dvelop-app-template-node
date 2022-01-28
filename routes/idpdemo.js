@@ -1,26 +1,26 @@
 const express = require('express');
-const dvelop = require('../middleware/dvelop')
+const dvelop = require('@dvelop-sdk/express-utils');
 
 module.exports = function (assetBasePath) {
-    const router = express.Router();
+  const router = express.Router();
 
-    router.use(dvelop.authenticate); // This page requires a logged in user.
+  router.use(dvelop.authenticationMiddleware); // This page requires a logged in user.
 
-    router.get('/', function (req, res, next) {
-        res.format({
-            'text/html': function () {
-                res.render('idpdemo', {
-                    title: 'Idp Demo',
-                    stylesheet: `${assetBasePath}/idpdemo.css`,
-                    UserId:req.principal.id,
-                    UserName:req.principal.displayName,
-                });
-            },
-            'default': function () {
-                res.status(406).send('Not Acceptable')
-            }
+  router.get('/', function (req, res, next) {
+    res.format({
+      'text/html': function () {
+        res.render('idpdemo', {
+          title: 'Idp Demo',
+          stylesheet: `${assetBasePath}/idpdemo.css`,
+          UserId: req.dvelopContext.user.id,
+          UserName: req.dvelopContext.user.displayName
         });
+      },
+      'default': function () {
+        res.status(406).send('Not Acceptable')
+      }
     });
-    return router;
+  });
+  return router;
 };
 
