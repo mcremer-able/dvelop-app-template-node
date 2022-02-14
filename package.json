@@ -12,7 +12,7 @@
   "author": "Martin Testrot",
   "license": "Apache-2.0",
   "dependencies": {
-    "@dvelop-sdk/express-utils": "^1.0.0",
+    "@dvelop-sdk/express-utils": "^1.1.2",
     "aws-serverless-express": "^3.3.8",
     "cookie-parser": "^1.4.5",
     "debug": "~2.6.9",
