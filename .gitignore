@@ -3,4 +3,5 @@
 /terraform/.terraform/
 .idea/
 /node_modules/
+.env
 
