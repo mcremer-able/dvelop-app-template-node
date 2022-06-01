@@ -4,6 +4,7 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const dvelop = require("@dvelop-sdk/express-utils");
+var bodyParser = require("body-parser");
 require("dotenv").config();
 
 const appName = "hackathon-demo";
@@ -19,6 +20,7 @@ const vacationrequestRouter = require("./routes/vacationrequest")(
 );
 const idpDemoRouter = require("./routes/idpdemo")(assetBasePath);
 const dmsobjectextensions = require("./routes/dmsobjectextentions");
+const listImages = require("./routes/listimages");
 
 const app = express();
 
@@ -61,6 +63,13 @@ app.use(basePath + "/features", featuresRouter);
 app.use(basePath + "/vacationrequest/", vacationrequestRouter);
 app.use(basePath + "/idpdemo", idpDemoRouter);
 app.use(basePath + "/dmsobjectextensions", dmsobjectextensions);
+app.use(basePath + "/listimages", listImages);
+
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
