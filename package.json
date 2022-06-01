@@ -15,6 +15,7 @@
   "dependencies": {
     "@dvelop-sdk/express-utils": "^1.1.2",
     "aws-serverless-express": "^3.3.8",
+    "body-parser": "^1.20.0",
     "cookie-parser": "^1.4.5",
     "debug": "~2.6.9",
     "dotenv": "^16.0.1",

@@ -4,6 +4,7 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const dvelop = require("@dvelop-sdk/express-utils");
+var bodyParser = require("body-parser");
 require("dotenv").config();
 
 const appName = "hackathon-demo";
@@ -19,6 +20,7 @@ const vacationrequestRouter = require("./routes/vacationrequest")(
 );
 const idpDemoRouter = require("./routes/idpdemo")(assetBasePath);
 const dmsobjectextensions = require("./routes/dmsobjectextentions");
+const listImages = require("./routes/listimages");
 
 const app = express();
 
