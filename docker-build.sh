@@ -1,6 +1,6 @@
 #!/bin/bash
 
-APPNAME=acme-apptemplatenode
+APPNAME=hackathon-demo
 BUILDCONTAINER=registry.invalid/${APPNAME}_build
 
 DENV=

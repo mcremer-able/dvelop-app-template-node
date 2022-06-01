@@ -4,11 +4,12 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const dvelop = require('@dvelop-sdk/express-utils');
+require('dotenv').config()
 
-const appName = 'acme-apptemplate';
+const appName = 'hackathon-demo';
 const basePath = "/" + appName;
 const assetBasePath = process.env.ASSET_BASE_PATH || `/${appName}/assets`;
-const version = process.env.BUILD_VERSION || '1.0.0';
+const version = process.env.BUILD_VERSION || '1.0.1';
 
 const rootRouter = require('./routes/root')(assetBasePath, basePath, version);
 const cloudCenterEventRouter = require('./routes/cloudcenterevents')();

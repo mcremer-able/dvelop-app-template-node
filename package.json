@@ -1,5 +1,5 @@
 {
-  "name": "acme-apptemplatenode",
+  "name": "hackathon-demo",
   "version": "0.0.1",
   "description": "This template contains everything you need to write an app for d.velop cloud.",
   "private": true,
@@ -7,7 +7,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "node-dev --no-notify ./bin/www",
-    "start": "node ./bin/www"
+    "start": "nodemon ./bin/www",
+    "dev": "set DEBUG=* & npm start"
   },
   "author": "Martin Testrot",
   "license": "Apache-2.0",
@@ -16,10 +17,12 @@
     "aws-serverless-express": "^3.3.8",
     "cookie-parser": "^1.4.5",
     "debug": "~2.6.9",
+    "dotenv": "^16.0.1",
     "express": "^4.17.1",
     "hbs": "^4.1.2",
     "http-errors": "^1.7.3",
     "morgan": "~1.9.1",
+    "nodemon": "^2.0.16",
     "request": "^2.88.2",
     "uuid": "^3.4.0"
   },

@@ -2,7 +2,7 @@
 
 setlocal enableextensions enabledelayedexpansion
 
-set APPNAME=acme-apptemplatenode
+set APPNAME=hackathon-demo
 set BUILDCONTAINER=registry.invalid/%APPNAME%_build
 
 set "denv="
