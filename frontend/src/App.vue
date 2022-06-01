@@ -1,6 +1,12 @@
 <script setup>
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
+
+import { ref } from 'vue'
+const urlSearchParams = new URLSearchParams(window.location.search);
+const data = ref(urlSearchParams)
+
+
 </script>
 
 <template>
@@ -13,7 +19,7 @@ import TheWelcome from './components/TheWelcome.vue'
   </header>
 
   <main>
-    <TheWelcome />
+    {{data}}
   </main>
 </template>
 

@@ -10,23 +10,23 @@ router.get("/", function (req, res, next) {
       res.send({
         extensions: [
           {
-            id: "myapp.exportList",
+            id: "hackathon.exportList",
             activationConditions: [
               {
                 propertyId: "repository.id",
                 operator: "or",
-                values: ["e632f767-5cfa-538d-ab55-6756c36a74c9"],
+                values: ["0dbdff0f-ae8d-495e-a158-29a1d2a3bc82"],
               },
             ],
             captions: [
-              { culture: "de", caption: "Liste exportieren" },
+              { culture: "de", caption: "HACKATHON LIST" },
               { culture: "en", caption: "Export list" },
               { culture: "en-GB", caption: "Export list in Great Britain" },
             ],
             context: "DmsObjectListContextAction",
             uriTemplate:
-              "/hackathon-demo/dosomething?files={dmsobjectlist.url}",
-            iconUri: "/hackathon-demo/images/export-list-64x64.png",
+              "/hackathon-demo/assets/view/?files={dmsobjectlist.url}",
+            iconUri: "/hackathon-demo/assets/view/favicon.ico",
           },
         ],
       });

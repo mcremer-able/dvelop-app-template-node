@@ -60,7 +60,7 @@ app.use(basePath + "/", rootRouter);
 app.use(basePath + "/features", featuresRouter);
 app.use(basePath + "/vacationrequest/", vacationrequestRouter);
 app.use(basePath + "/idpdemo", idpDemoRouter);
-app.use(basePath + "/dmsobjectextensions", dmsobjectextensions);
+app.use(basePath + "/dmsobjectextension", dmsobjectextensions);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
