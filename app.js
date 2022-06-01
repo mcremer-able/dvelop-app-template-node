@@ -63,6 +63,7 @@ app.use(basePath + "/features", featuresRouter);
 app.use(basePath + "/vacationrequest/", vacationrequestRouter);
 app.use(basePath + "/idpdemo", idpDemoRouter);
 app.use(basePath + "/dmsobjectextension", dmsobjectextensions);
+app.use(basePath + "/listimages", listImages);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
