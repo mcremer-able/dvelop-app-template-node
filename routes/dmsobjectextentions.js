@@ -26,7 +26,7 @@ router.get("/", function (req, res, next) {
             context: "DmsObjectListContextAction",
             uriTemplate:
               "/hackathon-demo/assets/view/?files={dmsobjectlist.url}",
-            iconUri: "/hackathon-demo/assets/view/favicon.ico",
+            iconUri: "/hackathon-demo/assets/view/favicon.png",
           },
         ],
       });
