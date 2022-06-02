@@ -22,5 +22,6 @@ export default defineConfig({
   },
   build:{
     outDir:'../web/view',
+    emptyOutDir:true
   }
 })
