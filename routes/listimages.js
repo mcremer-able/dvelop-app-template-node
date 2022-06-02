@@ -18,9 +18,8 @@ const runPythonScript = (documentIds) => {
 // ATTENTION: This page does not use the authenticate middleware meaning its publicly available
 
 router.post("/", async function (req, res) {
-  //const images = req.body.images;
   const reqData = JSON.parse(JSON.stringify(req.body));
-  const documentIds = JSON.stringify(reqData.images);
+  const documentIds = JSON.stringify(reqData.documents);
   console.log(`Document IDs: ${documentIds}`);
 
   const data = await runPythonScript(documentIds);
