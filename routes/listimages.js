@@ -18,16 +18,23 @@ const runPythonScript = (documentIds) => {
 // ATTENTION: This page does not use the authenticate middleware meaning its publicly available
 
 router.post("/", async function (req, res) {
+  const docID = req.body.documents.join(",")
   const reqData = JSON.parse(JSON.stringify(req.body));
-  const documentIds = JSON.stringify(reqData.documents);
+  const documentIds = docID
   console.log(`Document IDs: ${documentIds}`);
+  let data
+  try {
+    data = await runPythonScript(documentIds);
+  } catch (error) {
 
-  const data = await runPythonScript(documentIds);
+    return next({ error, args: documentIds })
+  }
+  data = data.split(';')
   console.log(`Data: ${JSON.stringify(data)}`);
 
   res.format({
     "application/hal+json": function () {
-      res.send("POST request to get list of images");
+      res.send(data);
     },
 
     default: function () {
