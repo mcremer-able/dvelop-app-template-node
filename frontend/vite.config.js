@@ -14,7 +14,7 @@ export default defineConfig({
   server:{
     proxy:{
       '/api': {
-        target: 'https://able-managment-hackaton.d-velop.cloud',
+        target: 'http://localhost:5000/hackathon-demo',
         changeOrigin: true,
         rewrite: path => path.replace(/^\/api/, '')
       }

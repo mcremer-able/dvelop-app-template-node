@@ -1,10 +1,11 @@
 <template>
      <div class="fancy-card-grid">
-      <a href="#" class="fancy-card">
+      <a :href="dmsLink" class="fancy-card">
         <div class="imageandtext">
           <span class="fancy-card__number" aria-hidden="true">{{mime}}</span>
+          <img v-if="loading" src="https://via.placeholder.com/300" alt="">
 
-          <img :src="url" alt="" />
+          <img v-show="!loading" @load="loading = false" :src="url" alt="" />
         </div>
       </a>
     </div>
@@ -12,7 +13,15 @@
 
 <script>
 export default {
-    props:["url","mime"]
+    props:["url","mime","docID"],
+    data(){
+        return { loading:true}
+    },
+    computed:{
+        dmsLink(){
+            return `/dms/r/0dbdff0f-ae8d-495e-a158-29a1d2a3bc82/o2/${this.docID}`
+        }
+    }
 };
 </script>
 
@@ -31,7 +40,6 @@ export default {
   position: relative;
   margin-inline-end: auto;
   margin-inline-start: auto;  
-  z-index: -1;
   & > span{
       padding-inline-end: 0.5em;
   }
@@ -39,6 +47,7 @@ export default {
 
 img {
   max-width: min(100% - 3rem, 66rem);
+
 }
 
 :root {

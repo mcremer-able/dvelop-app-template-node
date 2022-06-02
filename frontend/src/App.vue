@@ -1,7 +1,7 @@
 <script setup>
 import { reactive, ref } from "vue";
 import Images from "./components/ImageContainer.vue";
-import * as sampleData from "./sampleData.json"
+import * as sampleData from "./sampleData.json";
 
 const filesURL = new URLSearchParams(window.location.search).get("files");
 const data = ref("");
@@ -46,46 +46,87 @@ async function mapIDs(vals) {
 
 const files = ref([]);
 
+const isDev = !import.meta.env.PROD;
 
-const isDev = true
+console.log(`Running in ${isDev ? "dev" : "Production"}`);
 
-async function getSelection(filesURL){
+async function getSelection(filesURL) {
   if (isDev) {
-    return sampleData
+    return sampleData;
   } else {
-    return fetch(filesURL).then(res=>res.json())
+    return fetch(filesURL).then((res) => res.json());
   }
 }
 
+const API = isDev ? "/api" : "/hackathon-demo";
+const loading = ref(true)
 
+async function getImages(ids) {
+  if (isDev)
+    return [
+      {
+        docID: "KO00000094",
+        url: "https://source.unsplash.com/random/300x300/?Barefoot,Contessa,Cookbook",
+        mime: "application/pdf",
+        error: false,
+      },
+      {
+        docID: "KO00000093",
+        url: "https://source.unsplash.com/random/300x300/?King,Arthur,Unbleached",
+        mime: "application/pdf",
+        error: false,
+      },
+      {
+        docID: "KO00000090",
+        url: "https://source.unsplash.com/random/300x300/?cook,minutes,Add",
+        mime: "application/pdf",
+        error: false,
+      },
+      {
+        docID: "KO00000088",
+        url: "https://source.unsplash.com/random/300x300/?Spicy,Add,chickpeas",
+        mime: "application/pdf",
+        error: false,
+      },
+      {
+        docID: "KO00000086",
+        url: "https://source.unsplash.com/random/300x300/?Prosciutto,Walnuts,Parmesan",
+        mime: "application/pdf",
+        error: false,
+      },
+    ];
+  const body = JSON.stringify({ documents: ids });
+  return fetch(API + "/listimages", {
+    method: "Post",
+    body,
+    headers: {
+      Accept: "application/hal+json",
+      "Content-Type": "application/hal+json",
+    },
+  }).then((res) => res.json());
+}
 
 if (filesURL) {
   getSelection(filesURL)
     .then(mapIDs)
-    .then((e) =>
-      e.map((id) => {
-        files.value.push({
-          id,
-          url: "https://source.unsplash.com/random/300x300/?city,night",
-          mime: "pdf",
-        });
-      })
-    );
-  const body = {
-    ids: [1, 2, 3, 4],
-  };
-  //fetch('/api/todos/1')
+    .then(getImages)
+    .then((items) => {
+      loading.value = false
+      files.value = [...items]
+    });
 }
 </script>
 
 <template>
-  <main class="container" >
-    <span>Your Files</span>
+  <main class="container-fluid">
+    <span>Content Explorer</span>
+    <a href="#" v-show="loading" :aria-busy="loading">Generating content, please wait…</a>
 
-    <article class="flexy" >
+    <article :v-if="!loading" class="flexy">
       <Images
         v-for="image in files"
-        :key="image.id"
+        :key="image.docID"
+        :docID="image.docID"
         :url="image.url"
         :mime="image.mime"
       />
@@ -105,9 +146,9 @@ if (filesURL) {
   padding-block-start: 1rem;
   align-content: baseline;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 2rem;
 }
 body {
-  padding: 3rem;
+  padding-top: 2rem;
 }
 </style>
