@@ -1,30 +1,82 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import Images from './components/ImageContainer.vue'
+
 
 import { ref } from 'vue'
-const urlSearchParams = new URLSearchParams(window.location.search);
-const data = ref(urlSearchParams)
+const filesURL = new URLSearchParams(window.location.search).get('files') 
+const data = ref('')
+const baseURL = 'https://able-managment-hackaton.d-velop.cloud'
+
+/**
+ * @typedef {selectionListItem[]} selectionList
+ */
+
+/**
+ * @typedef {Object} linkObject
+ * @property {Object} self
+ * @property {string} self.href link to dms object without base path
+ */
+
+/**
+ * @typedef {Object} selectionListItem
+ * @property {linkObject} _links
+ * @property {string} id dms Object id
+ * @property {string} caption display name
+ */
+
+/**
+ * @typedef {Object} dmsResponse
+ * @property {selectionList} selectionList
+ */
+
+
+/**
+ * 
+ * Response from dms
+ * @typedef {Object} dmsResponse
+ * @property {boolean} selectionList - List items
+ */
+
+/**
+ * @param {dmsResponse} res
+ */
+async function mapIDs(res) {
+  return res.selectionList.map(item=>item.id)
+}
+
+if (filesURL) {
+  fetch(filesURL).then(mapIDs).then(console.log)
+  const body ={
+    ids:[1,2,3,4]
+  }
+  //fetch('/api/todos/1')
+}
 
 
 </script>
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+    <img
+      alt="Vue logo"
+      class="logo"
+      src="./assets/logo.svg"
+      width="125"
+      height="125"
+    />
 
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+      <Images />
     </div>
   </header>
 
   <main>
-    {{data}}
+    {{ data }}
   </main>
 </template>
 
 <style>
-@import './assets/base.css';
+@import "./assets/base.css";
 
 #app {
   max-width: 1280px;
