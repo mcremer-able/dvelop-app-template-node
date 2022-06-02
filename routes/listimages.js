@@ -22,8 +22,16 @@ router.post("/", async function (req, res) {
   let data;
   try {
     console.log(`Document IDs: ${documentIds}`);
-    data = await runPythonScript(documentIds);
-    data = data.split(",").map((element) => element.trim());
+    //data = await runPythonScript(documentIds);
+    data = "www.example.com;K0001;pdf#www.example2.com;K0002;pdf";
+    data = data.split("#").map((element) => {
+      let record = element.split(";");
+      return {
+        url: record[0].trim(),
+        docID: record[1].trim(),
+        mime: record[2].trim(),
+      };
+    });
   } catch (error) {
     return res.status(500).json({ error, args: documentIds });
   }
