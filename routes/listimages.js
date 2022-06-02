@@ -18,19 +18,15 @@ const runPythonScript = (documentIds) => {
 // ATTENTION: This page does not use the authenticate middleware meaning its publicly available
 
 router.post("/", async function (req, res) {
-  const docID = req.body.documents.join(",")
-  const reqData = JSON.parse(JSON.stringify(req.body));
-  const documentIds = docID
-  console.log(`Document IDs: ${documentIds}`);
-  let data
+  const documentIds = req.body.documents.join(",");
+  let data;
   try {
+    console.log(`Document IDs: ${documentIds}`);
     data = await runPythonScript(documentIds);
+    data = data.split(",").map((element) => element.trim());
   } catch (error) {
-
-    return next({ error, args: documentIds })
+    return res.status(500).json({ error, args: documentIds });
   }
-  data = data.split(';')
-  console.log(`Data: ${JSON.stringify(data)}`);
 
   res.format({
     "application/hal+json": function () {
